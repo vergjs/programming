@@ -35,5 +35,19 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
-    # PUT YOUR CODE HERE
+    plaintext = ""
+    keyword = keyword.upper()
+    keyword_index = 0
+
+    for char in ciphertext:
+        if char.isalpha():
+            shift = ord(keyword[keyword_index % len(keyword)]) - ord('A')
+            if char.isupper():
+                plaintext += chr((ord(char) - ord('A') - shift) % 26 + ord('A'))
+            else:
+                plaintext += chr((ord(char) - ord('a') - shift) % 26 + ord('a'))
+            keyword_index += 1
+        else:
+            plaintext += char
+
     return plaintext
