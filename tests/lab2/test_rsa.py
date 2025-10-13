@@ -1,5 +1,5 @@
 import unittest
-from src.lab2.rsa import is_prime, gcd, multiplicative_inverse, generate_keypair
+from src.lab2.rsa import is_prime, gcd, multiplicative_inverse, generate_keypair, encrypt, decrypt
 
 class RSATest(unittest.TestCase):
     def test_is_prime(self):
@@ -16,3 +16,23 @@ class RSATest(unittest.TestCase):
 
     def test_multiplicative_inverse(self):
         self.assertEqual(multiplicative_inverse(7, 40), 23)
+
+    def test_generate_keypair_and_encrypt_decrypt(self):
+        p, q = 17, 23
+        public, private = generate_keypair(p, q)
+
+        message = "hello"
+        encrypted = encrypt(public, message)
+        decrypted = decrypt(private, encrypted)
+
+        self.assertEqual(decrypted, message)
+
+    def test_invalid_primes(self):
+        with self.assertRaises(ValueError):
+            generate_keypair(4, 9)
+        with self.assertRaises(ValueError):
+            generate_keypair(7, 7)
+
+
+if __name__ == "__main__":
+    unittest.main()
