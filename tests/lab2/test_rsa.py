@@ -8,3 +8,11 @@ class RSATest(unittest.TestCase):
         self.assertFalse(is_prime(8))
         self.assertFalse(is_prime(1))
         self.assertFalse(is_prime(0))
+
+    def test_gcd(self):
+        self.assertEqual(gcd(12, 15), 3)
+        self.assertEqual(gcd(3, 7), 1)
+        self.assertEqual(gcd(100, 10), 10)
+
+    def test_multiplicative_inverse(self):
+        self.assertEqual(multiplicative_inverse(7, 40), 23)
