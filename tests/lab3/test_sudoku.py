@@ -27,7 +27,23 @@ class SudokuTest(unittest.TestCase):
         self.assertEqual(get_block(grid, (0,0)), ['1','2','3','4','5','6','7','8','9'])
         self.assertEqual(get_block(grid, (3,3)), ['9','1','4','5'])
 
+    def test_find_empty_positions(self):
+        self.assertEqual(find_empty_positions(self.small_grid), (0,2))
+        full = [['1','2','3'],['4','5','6'],['7','8','9']]
+        self.assertIsNone(find_empty_positions(full))
 
+    def test_find_possible_values(self):
+        grid = [
+            ['1','2','.'],
+            ['4','.','6'],
+            ['.','8','9']
+        ]
+        pos = (0,2)
+        values = find_possible_values(grid, pos)
+        self.assertTrue(values.issubset(set("123456789")))
+        self.assertNotIn('1', values)
+        self.assertNotIn('2', values)
+        self.assertIn('3', values)
 
     def test_solve_and_check(self):
         puzzle = [
