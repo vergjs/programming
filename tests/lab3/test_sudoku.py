@@ -61,6 +61,12 @@ class SudokuTest(unittest.TestCase):
         self.assertTrue(solution is not None)
         self.assertTrue(check_solution(solution))
 
+    def test_check_solution(self):
+        self.assertTrue(check_solution(self.full_grid))
+        broken = [row[:] for row in self.full_grid]
+        broken[0][0] = '9'
+        self.assertFalse(check_solution(broken))
+
 if __name__ == "__main__":
     unittest.main()
 
