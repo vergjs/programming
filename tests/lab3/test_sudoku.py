@@ -27,6 +27,24 @@ class SudokuTest(unittest.TestCase):
         self.assertEqual(get_block(grid, (0,0)), ['1','2','3','4','5','6','7','8','9'])
         self.assertEqual(get_block(grid, (3,3)), ['9','1','4','5'])
 
+
+
+    def test_solve_and_check(self):
+        puzzle = [
+            ['5','3','.','.','7','.','.','.','.'],
+            ['6','.','.','1','9','5','.','.','.'],
+            ['.','9','8','.','.','.','.','6','.'],
+            ['8','.','.','.','6','.','.','.','3'],
+            ['4','.','.','8','.','3','.','.','1'],
+            ['7','.','.','.','2','.','.','.','6'],
+            ['.','6','.','.','.','.','2','8','.'],
+            ['.','.','.','4','1','9','.','.','5'],
+            ['.','.','.','.','8','.','.','7','9']
+        ]
+        solution = solve(puzzle)
+        self.assertTrue(solution is not None)
+        self.assertTrue(check_solution(solution))
+
 if __name__ == "__main__":
     unittest.main()
 
