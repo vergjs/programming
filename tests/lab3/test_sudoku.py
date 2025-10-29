@@ -3,7 +3,25 @@ from src.lab3.sudoku import group, get_row, get_col, get_block, find_empty_posit
 
 class SudokuTest(unittest.TestCase):
 
+    def setUp(self):
 
+        self.small_grid = [
+            ['1','2','.'],
+            ['4','.','6'],
+            ['.','8','9']
+        ]
+
+        self.full_grid = [
+            ['5','3','4','6','7','8','9','1','2'],
+            ['6','7','2','1','9','5','3','4','8'],
+            ['1','9','8','3','4','2','5','6','7'],
+            ['8','5','9','7','6','1','4','2','3'],
+            ['4','2','6','8','5','3','7','9','1'],
+            ['7','1','3','9','2','4','8','5','6'],
+            ['9','6','1','5','3','7','2','8','4'],
+            ['2','8','7','4','1','9','6','3','5'],
+            ['3','4','5','2','8','6','1','7','9']
+        ]
 
     def test_group_basic(self):
         self.assertEqual(group([1,2,3,4], 2), [[1,2],[3,4]])
@@ -66,6 +84,11 @@ class SudokuTest(unittest.TestCase):
         broken = [row[:] for row in self.full_grid]
         broken[0][0] = '9'
         self.assertFalse(check_solution(broken))
+
+    def test_generate_sudoku_counts(self):
+        grid = generate_sudoku(30)
+        empty_cells = sum(row.count('.') for row in grid)
+        self.assertEqual(empty_cells, 30)
 
 if __name__ == "__main__":
     unittest.main()
